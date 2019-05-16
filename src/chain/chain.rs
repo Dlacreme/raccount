@@ -33,12 +33,9 @@ impl Chain {
     pub fn traverse(&self) {
         for (i, block) in self.blocks.iter().enumerate() {
             println!("block: {}", i);
-            println!("hash: {:?}", block.print());
-            println!("parent: {:?}", block.print());
             println!("data: {:?}", block.print());
             println!()
         }
     }
 
 }
-

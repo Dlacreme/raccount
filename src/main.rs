@@ -28,7 +28,9 @@ fn main() {
 fn demo() -> Result<(), chain::error::MiningError> {
     let mut c = chain::chain::Chain::new()?;
     println!("Start");
-    c.push("New block Hello")?;
+
+    c.push("Block 1")?;
+    c.push("Block 2")?;
 
     c.traverse();
 
