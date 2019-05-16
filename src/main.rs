@@ -22,15 +22,13 @@ fn main() {
     let conf = config::Config::load(String::from("./Raccount.toml"));
     hello_world(&conf);
 
-    demo();
+    demo().unwrap();
 }
 
 fn demo() -> Result<(), chain::error::MiningError> {
     let mut c = chain::chain::Chain::new()?;
     println!("Start");
-    c.push("New block Hello");
-    c.push("Print block haha");
-    c.push("wowowow hello");
+    c.push("New block Hello")?;
 
     c.traverse();
 

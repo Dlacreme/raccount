@@ -52,7 +52,7 @@ impl Block {
     fn try_hash(&self) -> Option<u64> {
         // Target is used to compare the hash.
         // It is a 256bit binay with $DIFFICULTY leading zeros
-        let target = BigUint::one() << (256 - 4 * DIFFICULTY);
+        let target = BigUint::one() << (256 - DIFFICULTY);
 
         for nonce in 0..MAX_NONCE {
             let hash = self.calculate_hash(nonce);
