@@ -1,0 +1,12 @@
+[app]
+version = 0.1
+name = "Raccount"
+prod = false
+
+[db]
+hostname = "localhost"
+port = 5132
+database = "raccount_dev"
+user = "raccount"
+password = "raccount_rules"
+

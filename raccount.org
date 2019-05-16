@@ -1,0 +1,23 @@
+* Introduction
+
+Raccount will store all accounting transaction using BlockChain system (POW)
+
+Once a day, a cron will parse validated transactions and create a reporting for the D day
+
+Reporting will be available through a web UI
+
+* Stack
+
+** BlockChain system
+
+Rust
+
+** HTTP API
+
+Typescript - Express
+
+** Web Application
+
+Typescript - Angular
+
+* Tasks

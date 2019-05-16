@@ -1,0 +1,18 @@
+[package]
+name = "raccount"
+version = "0.1.0"
+authors = ["Mathieu <dlacreme@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+serde = "1.0.89"
+serde_derive = "1.0.89"
+serde_json = "1.0.39"
+toml = "0.5.0"
+regex = "1.1.6"
+postgres = "0.15"
+chrono = "0.4"
+rust-crypto = "0.2.36"
+num-bigint = "0.2.2"
+num-traits = "0.2.6"
+
