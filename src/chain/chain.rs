@@ -1,8 +1,10 @@
+use super::super::transaction;
 use super::block;
 use super::error;
+use super::writer;
 
 pub struct Chain {
-    blocks: Vec<block::Block>,
+    pub blocks: Vec<block::Block>,
 }
 
 impl Chain {
@@ -12,7 +14,7 @@ impl Chain {
         Ok(Self{ blocks: vec![blocks]})
     }
 
-    pub fn push(&mut self, data: &str) -> Result<(), error::MiningError> {
+    pub fn push(&mut self, data: transaction::Transaction) -> Result<(), error::MiningError> {
         let block: block::Block;
         {
             match self.blocks.last() {
@@ -25,7 +27,7 @@ impl Chain {
             }
         }
         self.blocks.push(block);
-
+        writer::save_file_async(&self);
         Ok(())
     }
 

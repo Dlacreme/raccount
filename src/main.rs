@@ -1,13 +1,13 @@
 extern crate serde;
 extern crate crypto;
-extern crate serde_derive;
-extern crate serde_json;
 extern crate toml;
 extern crate regex;
 extern crate chrono;
 extern crate num_bigint;
 extern crate num_traits;
+extern crate iso4217;
 
+mod faker;
 mod config;
 mod parser;
 mod chain;
@@ -29,8 +29,8 @@ fn demo() -> Result<(), chain::error::MiningError> {
     let mut c = chain::chain::Chain::new()?;
     println!("Start");
 
-    c.push("Block 1")?;
-    c.push("Block 2")?;
+    c.push(faker::transaction(String::from("TEST 1")))?;
+    c.push(faker::transaction(String::from("TEST 2")))?;
 
     c.traverse();
 

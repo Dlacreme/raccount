@@ -1,6 +1,8 @@
 use super::super::transaction;
+use super::super::faker;
 use super::error;
 use super::pow;
+use serde_derive::{Serialize, Deserialize};
 use chrono::prelude::*;
 use crypto::digest::Digest;
 use crypto::sha2::Sha256;
@@ -13,26 +15,26 @@ const MAX_NONCE: u64 = 1_000_000;
 
 pub type Sha256Hash = [u8; HASH_BYTE_SIZE];
 
-#[derive(Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Block {
     // Headers.
     timestamp: i64,
     prev_block_hash: Sha256Hash,
     nonce: u64,
 
-    data: transaction::Transaction,
+    transaction: transaction::Transaction,
 }
 
 impl Block {
 
     pub fn genesis() -> Result<Self, error::MiningError> {
-        Self::new("Genesis block", Sha256Hash::default())
+        Self::new(faker::transaction(String::from("GENESIS")), Sha256Hash::default())
     }
 
-    pub fn new(data: &str, prev_hash: Sha256Hash) -> Result<Self, error::MiningError> {
+    pub fn new(transaction: transaction::Transaction, prev_hash: Sha256Hash) -> Result<Self, error::MiningError> {
         let mut s = Self {
             prev_block_hash: prev_hash,
-            data: transaction::Transaction::new(String::from(data)),
+            transaction: transaction,
             timestamp: Utc::now().timestamp(),
             nonce: 0,
         };
@@ -87,8 +89,16 @@ impl Block {
         vec
     }
 
-    pub fn print(&self) -> &str {
-        self.data.id.as_str()
+    pub fn print(&self) -> String {
+        let tr = &self.transaction;
+        format!("[{}:{}] {} => {:.2} {} => {}",
+            tr.id.as_str(),
+            tr.timestamp,
+            tr.from.code.as_str(),
+            tr.original_amount.vat_amount,
+            std::str::from_utf8(&tr.original_currency).unwrap(),
+            tr.to.code.as_str()
+        )
     }
 
 }
