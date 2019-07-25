@@ -1,5 +1,3 @@
 # RACCOUNT
 
-Your decentralized accounting system
-
-
+Very simple block chain implementation
